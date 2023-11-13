@@ -4,20 +4,23 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { navVariants } from '../utils/motion';
+import { usePathname } from 'next/navigation';
 import styles from '../styles';
 import Link from 'next/link';
 import { GiHamburgerMenu } from "react-icons/gi";
-import '../styles/button.css'
+import '../styles/button.css';
 
 const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
   };
 
-  const handleMenuClick = (path) => {
+  const handleMenuClick = (path, event) => {
+    event.preventDefault(); // Prevent the default behavior
     router.push(path);
     setIsNavOpen(false); // Close the mobile menu after clicking a link
   };
@@ -30,9 +33,9 @@ const Navbar = () => {
       className={`${styles.xPaddings} ${styles.flexCenter} py-8 relative top-0`}
     >
       <div className={`${styles.innerWidth} flex items-center justify-between p-4`}>
-        <button class="header-title" data-text="Awesome" onClick={() => router.push('/')}>
-          <span class="actual-text">&nbsp;iste-hit-sc&nbsp;</span>
-          <span aria-hidden="true" class="hover-text">&nbsp;iste-hit-sc &nbsp;</span>
+        <button className="header-title" data-text="Awesome" onClick={() => router.push('/')}>
+          <span className="actual-text">&nbsp;iste-hit-sc&nbsp;</span>
+          <span aria-hidden="true" className="hover-text">&nbsp;iste-hit-sc &nbsp;</span>
         </button>
         <div className="md:hidden">
           <button
@@ -57,23 +60,20 @@ const Navbar = () => {
               { path: '/memories', label: 'MEMORIES' },
             ].map((item, index) => (
               <li key={index}>
-                <Link
-                  onClick={() => handleMenuClick(item.path)}
-                  href={item.path}
-                  className={`block rounded ${router.pathname === item.path ? 'border-white border-b-2 text-white' : 'text-white'} hover:font-extrabold`}
+                <div
+                  onClick={(event) => handleMenuClick(item.path, event)}
+                  className={`block rounded ${pathname === item.path ? 'border-b-4 text-white' : 'text-white'} cursor-pointer hover:font-extrabold`}
                 >
                   {item.label}
-                </Link>
+                </div>
               </li>
             ))}
             <div className="flex gap-2 m-4 md:ml-12">
-              <button
-                type="button" // Added type attribute
-                className='button'
-                onClick={() => handleMenuClick('/login')}
-              >
-                <p>Login</p>
-              </button>
+              <Link legacyBehavior href="/login">
+                <a className='button' onClick={() => setIsNavOpen(false)}>
+                  <p>Login</p>
+                </a>
+              </Link>
             </div>
           </ul>
         </div>
