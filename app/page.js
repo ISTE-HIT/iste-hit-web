@@ -1,7 +1,5 @@
-import { Footer, Navbar } from "../components";
 import {
   About,
-  Contributors,
   Explore,
   Hero,
   JoinUs,
@@ -27,7 +25,6 @@ const Home = () => (
       <Message />
       <div className="bg-black z-0" />
     </div>
-      <Contributors />
   </div>
 );
 

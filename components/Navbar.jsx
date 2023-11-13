@@ -7,6 +7,7 @@ import { navVariants } from '../utils/motion';
 import styles from '../styles';
 import Link from 'next/link';
 import { GiHamburgerMenu } from "react-icons/gi";
+import '../styles/button.css'
 
 const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -29,11 +30,10 @@ const Navbar = () => {
       className={`${styles.xPaddings} ${styles.flexCenter} py-8 relative top-0`}
     >
       <div className={`${styles.innerWidth} flex items-center justify-between p-4`}>
-        <img
-          src="https://img.icons8.com/?size=512&id=hXQVOG_zPMn1&format=png"
-          className="h-8 mr-3"
-          alt="hit-iste-logo"
-        />
+        <button class="header-title" data-text="Awesome" onClick={() => router.push('/')}>
+          <span class="actual-text">&nbsp;iste-hit-sc&nbsp;</span>
+          <span aria-hidden="true" class="hover-text">&nbsp;iste-hit-sc &nbsp;</span>
+        </button>
         <div className="md:hidden">
           <button
             type="button"
@@ -42,7 +42,7 @@ const Navbar = () => {
             aria-controls="navbar-sticky"
             aria-expanded={isNavOpen}
           >
-            <GiHamburgerMenu className='w-5 h-5 text-xl'/>
+            <GiHamburgerMenu className='w-5 h-5 text-xl' />
           </button>
         </div>
         <div
@@ -58,8 +58,8 @@ const Navbar = () => {
             ].map((item, index) => (
               <li key={index}>
                 <Link
-                  href={item.path}
                   onClick={() => handleMenuClick(item.path)}
+                  href={item.path}
                   className={`block rounded ${router.pathname === item.path ? 'border-white border-b-2 text-white' : 'text-white'} hover:font-extrabold`}
                 >
                   {item.label}
@@ -69,17 +69,10 @@ const Navbar = () => {
             <div className="flex gap-2 m-4 md:ml-12">
               <button
                 type="button" // Added type attribute
-                className="text-white text-md py-2 px-4 cursor-pointer bg-transparent border border-white rounded-full hover:bg-white hover:text-black transition duration-300 ease-in-out"
-                onClick={() => handleMenuClick('/register')}
-              >
-                Register
-              </button>
-              <button
-                type="button" // Added type attribute
-                className="text-white text-md py-2 px-4 cursor-pointer bg-slate-600 rounded-full hover:bg-slate-700 transition duration-300 ease-in-out"
+                className='button'
                 onClick={() => handleMenuClick('/login')}
               >
-                Login
+                <p>Login</p>
               </button>
             </div>
           </ul>

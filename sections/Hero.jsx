@@ -31,7 +31,7 @@ const Hero = () => (
       className={`${styles.innerWidth} mx-auto flex flex-col sm:flex-row gap-10`}
     >
       {/* Left Div */}
-      <div className="flex flex-col justify-center items-start sm:w-1/2">
+      <div className="flex flex-col justify-center items-start sm:w-1/2 mt-16"> {/* Adjusted margin-top to move the content down */}
         <div className="z-10">
           <motion.h2
             variants={textVariant(1.1)}
